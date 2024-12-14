@@ -17,8 +17,12 @@ class Particle {
     }
 
     show() {
+        // 바람의 세기에 따라 색상 변화
+        let speed = this.vel.mag();
+        let colorIntensity = map(speed, 0, 5, 150, 255);
         noStroke();
-        fill(150, 100, 255, 100); // 궤적을 위한 투명도 설정
+        fill(colorIntensity, 200, 255 - colorIntensity, 150); // 속도에 따른 색상 변화
         ellipse(this.pos.x, this.pos.y, this.size);
     }
 }
+
