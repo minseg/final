@@ -5,27 +5,30 @@ let draggingRepeller = false; // Repeller 드래그 여부
 let draggingAttractor = false; // Attractor 드래그 여부
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(800, 600); // 캔버스 크기 변경
 
     // 초기화
-    particleSystem = new ParticleSystem(createVector(width / 6, height - 300));
-    repeller = new Repeller(width / 4, height / 4);
+    particleSystem = new ParticleSystem(createVector(width / 6, height - 150));
+    repeller = new Repeller(width / 4, height / 3);
     attractor = new Attractor(3 * width / 4, height / 2);
     currentColor = '#FFD1DC'; // 초기 색상 (파스텔 톤 빨강)
 }
 
 function draw() {
-    background(240);
+    drawBackground(); // 배경 그리기
+
+    // 텍스트 출력
+    drawTitle();
 
     // 줄기 그리기
     stroke(50, 200, 50);
     strokeWeight(6);
-    line(width / 6, height, width / 6, height - 300);
+    line(width / 6, height, width / 6, height - 150);
 
     // 꽃봉우리 그리기
     noStroke();
     fill(currentColor); // 봉우리 색상은 꽃잎 색상과 동일
-    ellipse(width / 6, height - 300, 50, 50);
+    ellipse(width / 6, height - 150, 50, 50);
 
     // 입자 시스템 실행
     particleSystem.applyRepeller(repeller); // Repeller 적용
@@ -40,6 +43,34 @@ function draw() {
     // Repeller와 Attractor 표시
     repeller.show();
     attractor.show();
+}
+
+// 배경 그리기 (푸른 하늘과 고정된 풀)
+function drawBackground() {
+    // 하늘 (그라디언트)
+    for (let y = 0; y < height; y++) {
+        let inter = map(y, 0, height, 0, 1);
+        let c = lerpColor(color(135, 206, 250), color(173, 216, 230), inter); // 하늘색 그라디언트
+        stroke(c);
+        line(0, y, width, y);
+    }
+
+    // 풀 (고정된 상태)
+    fill(60, 179, 113); // 초록 풀 색상
+    rect(0, height - 100, width, 100); // 풀 영역
+    stroke(34, 139, 34); // 풀의 진한 초록색
+    for (let x = 0; x < width; x += 20) {
+        line(x, height - 100, x, height - 90); // 고정된 풀
+    }
+}
+
+// 텍스트 출력
+function drawTitle() {
+    textAlign(CENTER, CENTER);
+    textSize(24);
+    fill(255, 250, 250); // 파스텔 톤 흰색
+    textStyle(BOLD);
+    text("우리는 삶의 바람 속에서 흔적을 남긴다.", width / 2, 40); // 핵심 문장
 }
 
 // 마우스 클릭한 원 판별
@@ -82,9 +113,5 @@ function keyPressed() {
     let colors = ['#FFD1DC', '#DFFFD6', '#FFFACD'];
     currentColor = colors[int(random(colors.length))];
     console.log(`Repeller Strength: ${repeller.strength}, Attractor Strength: ${attractor.strength}, Color: ${currentColor}`);
-}
-
-function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
 }
 
