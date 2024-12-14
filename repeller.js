@@ -16,7 +16,8 @@ class Repeller {
 
     show() {
         noStroke();
-        fill(255, 0, 0, 150);
+        fill('#FDFEFE'); // 파스텔 톤 흰색
         ellipse(this.pos.x, this.pos.y, this.size);
     }
 }
+
