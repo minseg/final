@@ -42,9 +42,8 @@ class Particle {
     }
 
     drawPetal(size) {
-        // 꽃잎 도형 그리기
         beginShape();
-        fill('#FFD1DC'); // 연한 핑크색
+        fill(currentColor); // 꽃잎 색상은 전역 변수 currentColor와 동기화
         noStroke();
         vertex(0, -size / 2); // 위쪽 점
         vertex(size / 4, 0); // 오른쪽 곡선
@@ -53,6 +52,7 @@ class Particle {
         endShape(CLOSE);
     }
 }
+
 
 
 

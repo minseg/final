@@ -16,8 +16,9 @@ class Attractor {
 
     show() {
         noStroke();
-        fill('#FFFACD'); // 파스텔 톤 노랑색
+        fill('#FFFACD'); // 파스텔 톤 노랑
         ellipse(this.pos.x, this.pos.y, this.size);
     }
 }
+
 

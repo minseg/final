@@ -1,30 +1,28 @@
 let particleSystem;
 let repeller, attractor;
+let currentColor; // 현재 색상 (꽃잎, 봉우리)
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
 
-    // 입자 시스템 초기화
+    // 초기화
     particleSystem = new ParticleSystem(createVector(width / 6, height - 300));
     repeller = new Repeller(width / 4, height / 4);
     attractor = new Attractor(3 * width / 4, height / 2);
+    currentColor = '#FFD1DC'; // 초기 색상 (파스텔 톤 빨강)
 }
 
 function draw() {
     background(240);
 
-    // 바람의 세기에 따라 줄기 색상 변화
-    let windForce = abs(repeller.strength + attractor.strength);
-    let stemColor = map(windForce, 0, 100, 50, 255);
-
     // 줄기 그리기
-    stroke(50, stemColor, 50); // 줄기 색상 동적 변화
+    stroke(50, 200, 50);
     strokeWeight(6);
     line(width / 6, height, width / 6, height - 300);
 
     // 꽃봉우리 그리기
     noStroke();
-    fill('#FFD1DC'); // 꽃잎과 같은 연한 핑크색
+    fill(currentColor); // 봉우리 색상은 꽃잎 색상과 동일
     ellipse(width / 6, height - 300, 50, 50);
 
     // 입자 시스템 실행
@@ -42,12 +40,22 @@ function draw() {
     attractor.show();
 }
 
-function mouseDragged() {
-    if (mouseX < width / 2) {
-        repeller.pos.set(mouseX, mouseY);
-    } else {
-        attractor.pos.set(mouseX, mouseY);
+// 키보드 입력으로 바람의 세기 조정
+function keyPressed() {
+    if (key === 'w') {
+        attractor.strength += 10;
+    } else if (key === 's') {
+        attractor.strength -= 10;
+    } else if (key === 'a') {
+        repeller.strength += 10;
+    } else if (key === 'd') {
+        repeller.strength -= 10;
     }
+
+    // 색상 변경: 파스텔 톤 빨강(#FFD1DC), 초록(#DFFFD6), 노랑(#FFFACD)
+    let colors = ['#FFD1DC', '#DFFFD6', '#FFFACD'];
+    currentColor = colors[int(random(colors.length))];
+    console.log(`Repeller Strength: ${repeller.strength}, Attractor Strength: ${attractor.strength}, Color: ${currentColor}`);
 }
 
 function windowResized() {
