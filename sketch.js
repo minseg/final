@@ -7,7 +7,7 @@ function setup() {
     // 입자 시스템 초기화
     particleSystem = new ParticleSystem(createVector(width / 6, height - 300));
     repeller = new Repeller(width / 4, height / 4);
-    attractor = new Attractor(3 * width / 4, 3 * height / 4);
+    attractor = new Attractor(3 * width / 4, height / 2);
 }
 
 function draw() {
@@ -24,13 +24,18 @@ function draw() {
 
     // 꽃봉우리 그리기
     noStroke();
-    fill(255, 100, 150);
+    fill('#FFD1DC'); // 꽃잎과 같은 연한 핑크색
     ellipse(width / 6, height - 300, 50, 50);
 
     // 입자 시스템 실행
     particleSystem.applyRepeller(repeller);
     particleSystem.applyAttractor(attractor);
     particleSystem.run();
+
+    // 모든 입자가 바닥에 가라앉으면 새로운 꽃잎 생성
+    if (particleSystem.allParticlesSettled()) {
+        particleSystem.resetParticles();
+    }
 
     // Repeller와 Attractor 표시
     repeller.show();
@@ -48,4 +53,3 @@ function mouseDragged() {
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
-
