@@ -1,9 +1,12 @@
 let particleSystem;
+let repeller, attractor;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
 
     particleSystem = new ParticleSystem(createVector(width / 6, height - 300));
+    repeller = new Repeller(width / 4, height / 4);
+    attractor = new Attractor(3 * width / 4, 3 * height / 4);
 }
 
 function draw() {
@@ -18,6 +21,11 @@ function draw() {
     fill(255, 100, 150);
     ellipse(width / 6, height - 300, 50, 50);
 
-    // 입자 시스템 실행
+    // Repeller와 Attractor
+    repeller.show();
+    attractor.show();
+
+    // 입자 시스템
     particleSystem.run();
 }
+
