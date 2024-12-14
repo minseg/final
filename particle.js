@@ -18,7 +18,7 @@ class Particle {
 
     show() {
         noStroke();
-        fill(150, 100, 255, 150);
+        fill(150, 100, 255, 100); // 궤적을 위한 투명도 설정
         ellipse(this.pos.x, this.pos.y, this.size);
     }
 }
