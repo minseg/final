@@ -11,19 +11,6 @@ class ParticleSystem {
         this.particles.push(new Particle(this.origin));
     }
 
-    allParticlesSettled() {
-        // 모든 입자가 바닥에 가라앉았는지 확인
-        return this.particles.every(p => p.settled);
-    }
-
-    resetParticles() {
-        // 기존 입자 제거 후 새로운 입자 생성
-        this.particles = [];
-        for (let i = 0; i < 100; i++) {
-            this.addParticle();
-        }
-    }
-
     applyRepeller(repeller) {
         for (let p of this.particles) {
             let force = repeller.repel(p);
@@ -44,4 +31,18 @@ class ParticleSystem {
             p.show();
         }
     }
+
+    allParticlesSettled() {
+        // 모든 입자가 바닥에 가라앉았는지 확인
+        return this.particles.every(p => p.settled);
+    }
+
+    resetParticles() {
+        // 기존 입자 제거 후 새로운 입자 생성
+        this.particles = [];
+        for (let i = 0; i < 100; i++) {
+            this.addParticle();
+        }
+    }
 }
+

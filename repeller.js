@@ -20,4 +20,3 @@ class Repeller {
         ellipse(this.pos.x, this.pos.y, this.size);
     }
 }
-

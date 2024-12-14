@@ -28,12 +28,8 @@ function draw() {
     ellipse(width / 6, height - 300, 50, 50);
 
     // 입자 시스템 실행
-    particleSystem.applyRepeller(repeller);
-    particleSystem.applyAttractor(attractor);
-
-    // Repeller와 Attractor가 서로 상호작용
-    interactRepellerAndAttractor();
-
+    particleSystem.applyRepeller(repeller); // Repeller 적용
+    particleSystem.applyAttractor(attractor); // Attractor 적용
     particleSystem.run();
 
     // 모든 입자가 바닥에 가라앉으면 새로운 꽃잎 생성
@@ -44,19 +40,6 @@ function draw() {
     // Repeller와 Attractor 표시
     repeller.show();
     attractor.show();
-}
-
-// 두 원의 상호작용 구현
-function interactRepellerAndAttractor() {
-    let distance = dist(repeller.pos.x, repeller.pos.y, attractor.pos.x, attractor.pos.y);
-
-    // 상호작용 로직 (거리 기반으로 힘 조정)
-    if (distance < 200) {
-        let force = map(distance, 0, 200, 50, 0); // 가까울수록 힘 증가
-        let dir = repeller.pos.copy().sub(attractor.pos).normalize().mult(force);
-        repeller.pos.add(dir);
-        attractor.pos.sub(dir);
-    }
 }
 
 // 마우스 클릭한 원 판별
