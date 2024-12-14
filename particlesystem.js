@@ -11,6 +11,20 @@ class ParticleSystem {
         this.particles.push(new Particle(this.origin));
     }
 
+    applyRepeller(repeller) {
+        for (let p of this.particles) {
+            let force = repeller.repel(p);
+            p.applyForce(force);
+        }
+    }
+
+    applyAttractor(attractor) {
+        for (let p of this.particles) {
+            let force = attractor.attract(p);
+            p.applyForce(force);
+        }
+    }
+
     run() {
         for (let p of this.particles) {
             p.update();

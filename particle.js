@@ -4,8 +4,8 @@ class Particle {
         this.vel = createVector(random(-1, 1), random(-1, 1));
         this.acc = createVector(0, 0);
         this.size = random(20, 40); // 입자 크기
-        this.angle = random(TWO_PI); // 입자의 회전 각도
-        this.settled = false; // 가라앉음 여부
+        this.angle = random(TWO_PI); // 입자 회전 각도
+        this.settled = false; // 입자가 바닥에 가라앉았는지 여부
     }
 
     applyForce(force) {
@@ -20,9 +20,9 @@ class Particle {
             this.pos.add(this.vel);
             this.acc.mult(0);
 
-            // 위쪽 경계에 닿으면 가라앉기 시작
+            // 위쪽 경계에 닿으면 아래로 가라앉기 시작
             if (this.pos.y <= 50) {
-                this.vel = createVector(0, random(1, 3)); // 아래로 느리게 떨어짐
+                this.vel = createVector(0, random(1, 3)); // 아래로 천천히 가라앉음
             }
 
             // 바닥에 닿으면 정지
@@ -42,7 +42,6 @@ class Particle {
     }
 
     drawPetal(size) {
-        // 꽃잎 도형 그리기
         beginShape();
         fill(255, 100, 150, 200); // 꽃잎 색상
         noStroke();
@@ -53,4 +52,5 @@ class Particle {
         endShape(CLOSE);
     }
 }
+
 
