@@ -5,7 +5,7 @@ let draggingRepeller = false; // Repeller 드래그 여부
 let draggingAttractor = false; // Attractor 드래그 여부
 
 function setup() {
-    createCanvas(800, 600); // 캔버스 크기 변경
+    createCanvas(1000, 600); // 캔버스 가로길이 변경
 
     // 초기화
     particleSystem = new ParticleSystem(createVector(width / 6, height - 150));
@@ -69,8 +69,10 @@ function drawTitle() {
     textAlign(CENTER, CENTER);
     textSize(24);
     fill(255, 250, 250); // 파스텔 톤 흰색
+    stroke(100, 100, 255); // 텍스트 테두리 색상 변경
+    strokeWeight(2);
     textStyle(BOLD);
-    text("우리는 삶의 바람 속에서 흔적을 남긴다.", width / 2, 40); // 핵심 문장
+    text("<Petals scattered by the wind tell the story of our journey>", width / 2, 40); // 핵심 문장
 }
 
 // 마우스 클릭한 원 판별
@@ -114,4 +116,3 @@ function keyPressed() {
     currentColor = colors[int(random(colors.length))];
     console.log(`Repeller Strength: ${repeller.strength}, Attractor Strength: ${attractor.strength}, Color: ${currentColor}`);
 }
-
